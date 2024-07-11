@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoURI = "mongodb://localhost:27017/";
+const mongoURI = "mongodb://localhost:27017/inotbook?readPreference=primary";
 
 const connectToMongo = () => {
     mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
