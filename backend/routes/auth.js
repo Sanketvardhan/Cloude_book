@@ -98,4 +98,5 @@ router.post('/getuser', fetchuser, async (req, res) => {
         res.status(500).send("Internal server error occurred.");
     }
 });
+
 module.exports = router;
