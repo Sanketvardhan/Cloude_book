@@ -14,7 +14,6 @@ const NotesSchema= new Schema({
    description:{
        type: String,
        require:true,
-       unique: true,
    },
    tag:{
        type: String,
