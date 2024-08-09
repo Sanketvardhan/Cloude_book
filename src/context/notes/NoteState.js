@@ -19,30 +19,29 @@ const NoteState = (props) => {
         "Content-Type": "application/json",
         "auth-token":
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5OWRlMGRiYzUzNTk4YzE5ZDk2MDZkIn0sImlhdCI6MTcyMTcwMTI5M30.kMvDHBzcnjdOGZWAo9iXOHPSZumUc25nt0fZrvROV7I",
-      }
+      },
     });
-    const json= await response.json()
+    const json = await response.json();
     // console.log(json)
-    setNotes(json)
+    setNotes(json);
   };
 
   //Add note
   const addNote = async ({ title, description, tag }) => {
     // API call
     let url = `${host}/api/notes/addnote`;
-
+    console.log(url)
     // fetching data from backend
     const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5OWRlMGRiYzUzNTk4YzE5ZDk2MDZkIn0sImlhdCI6MTcyMTcwMTI5M30.kMvDHBzcnjdOGZWAo9iXOHPSZumUc25nt0fZrvROV7I",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5OWRlMGRiYzUzNTk4YzE5ZDk2MDZkIn0sImlhdCI6MTcyMTYxODUxOH0.vKQ8re5J7hwXVS04FCi7krG_HLVuI5AbuGp19rK9vpE",
       },
       body: JSON.stringify({ title, description, tag }),
     });
 
-    //todo api call
     console.log("adding a new note");
     let note = {
       _id: "66a1bacc7c5ae3ef3d0b0e24",
@@ -57,8 +56,22 @@ const NoteState = (props) => {
   };
 
   //Delet note
-  const deletNote = (id) => {
-    //todo api call
+  const deletNote = async (id) => {
+    // API call
+    let url = `${host}/api/notes/delete/${id}`;
+
+    // fetching data from backend
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5OWRlMGRiYzUzNTk4YzE5ZDk2MDZkIn0sImlhdCI6MTcyMTcwMTI5M30.kMvDHBzcnjdOGZWAo9iXOHPSZumUc25nt0fZrvROV7I",
+      },
+    });
+    const json = response.json();
+    console.log(json);
+
     console.log("deleting note with id:" + id);
     const newnote = notes.filter((note) => {
       return note._id !== id;
