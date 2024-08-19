@@ -4,10 +4,11 @@ import NoteItem from "./NoteItem";
 import Addnote from "./Addnote";
 
 function Notes() {
-  const { notes, getNote } = useContext(noteContext);
-  const { addNote } = useContext(noteContext);
-  const [note,setNote]= useState({etitle:"", edescription:"",etag:""})
+  const { notes, getNote, editNote } = useContext(noteContext);
+  // const { addNote } = useContext(noteContext);
+  const [note,setNote]= useState({id:"", etitle:"", edescription:"",etag:""})
   const ref = useRef(null);
+  const refClose = useRef(null);
 
   useEffect(() => {
     getNote();
@@ -16,12 +17,14 @@ function Notes() {
 
   const updateNote = (currentNote) => {
     ref.current.click();
-    setNote({etitle:currentNote.title, edescription:currentNote.description, etag:currentNote.tag})
+    setNote({id:currentNote._id, etitle:currentNote.title, edescription:currentNote.description, etag:currentNote.tag})
   };
-
-const handleClick =(e)=>{
-  console.log("Updating the note...")
-    e.preventDefault();
+  
+  const handleClick =(e)=>{
+    console.log("Updating the note...",note)
+    editNote(note.id, note.etitle, note.edescription, note.etag)
+    refClose.current.click();
+    // e.preventDefault();
   }
   
   const onChange =(e)=>{
@@ -108,6 +111,7 @@ const handleClick =(e)=>{
             </div>
             <div className="modal-footer">
               <button
+              ref={refClose}
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
